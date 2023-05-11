@@ -19,8 +19,6 @@ namespace KrytoeNazvanie
 
         public override void OnEnabled()
         {
-            Player.Shooting += PlayerHandler.OnPlayerShooting;
-
             base.OnEnabled();
         }
     }

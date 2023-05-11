@@ -32,8 +32,6 @@ namespace KrytoeNazvanie.Commands
                 return true;
             }
 
-            string cp = "";
-
             Player player = Player.Get(sender);
 
             RaycastHit hit;
@@ -52,7 +50,7 @@ namespace KrytoeNazvanie.Commands
                 return true;
             }
 
-            response = "asdqw";
+            response = "Игрок не найден.";
 
             return true;
         }
