@@ -1,9 +1,5 @@
 ﻿using CommandSystem;
 using Exiled.API.Features;
-using Exiled.API.Features.Items;
-using Exiled.API.Features.Roles;
-using Hints;
-using InventorySystem.Items;
 using PlayerRoles;
 using RemoteAdmin;
 using System;
@@ -16,9 +12,9 @@ using UnityEngine;
 namespace KrytoeNazvanie.Commands
 {
     [CommandHandler(typeof(ClientCommandHandler))]
-    public class SetTutorialCommand : ICommand
+    public class BackCommand : ICommand
     {
-        public string Command => "tutorial";
+        public string Command => "back";
 
         public string[] Aliases => new string[] { };
 
@@ -37,17 +33,20 @@ namespace KrytoeNazvanie.Commands
 
             RaycastHit hit;
 
-            if(Physics.Raycast(player.CameraTransform.position, player.CameraTransform.forward, out hit, 50))
+            if (Physics.Raycast(player.CameraTransform.position, player.CameraTransform.forward, out hit, 50))
             {
                 Player target = Player.Get(hit.collider);
-                RoleTypeId role = target.Role.Type;
 
-                target.RoleManager.InitializeNewRole(RoleTypeId.Tutorial, RoleChangeReason.None);
+                target.RoleManager.InitializeNewRole(Program.OldRoles[target.UserId], PlayerRoles.RoleChangeReason.None);
 
                 if (!Program.OldRoles.ContainsKey(target.UserId))
                 {
-                    Program.OldRoles.Add(target.UserId, role);
+                    response = "Старая роль не найдена";
+
+                    return true;
                 }
+
+                Program.OldRoles.Remove(target.UserId);
 
                 response = "Игрок " + target.Nickname;
 
@@ -56,7 +55,7 @@ namespace KrytoeNazvanie.Commands
             else
             {
                 response = "very bruh";
-            }  
+            }
 
             return true;
         }

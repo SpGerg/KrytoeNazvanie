@@ -1,5 +1,6 @@
 ﻿using Exiled.API.Features;
 using Exiled.API.Interfaces;
+using PlayerRoles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,11 +15,20 @@ namespace KrytoeNazvanie
     {
         public static Program Instance => Singleton;
 
+        public static Dictionary<string, RoleTypeId> OldRoles = new Dictionary<string, RoleTypeId>();
+
         private static readonly Program Singleton = new Program();
 
         public override void OnEnabled()
         {
             base.OnEnabled();
+        }
+
+        public override void OnReloaded()
+        {
+            OldRoles.Clear();
+
+            base.OnReloaded();
         }
     }
 }
