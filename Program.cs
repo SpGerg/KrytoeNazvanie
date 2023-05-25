@@ -15,7 +15,7 @@ namespace KrytoeNazvanie
     {
         public static Program Instance => Singleton;
 
-        public static Dictionary<string, RoleTypeId> OldRoles = new Dictionary<string, RoleTypeId>();
+        public static Dictionary<string, OldPlayerState> OldRoles = new Dictionary<string, OldPlayerState>();
 
         private static readonly Program Singleton = new Program();
 

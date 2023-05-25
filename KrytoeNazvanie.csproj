@@ -84,9 +84,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\BackCommand.cs" />
-    <Compile Include="Commands\SetTutorialCommand.cs" />
+    <Compile Include="Commands\TutorialCommand.cs" />
     <Compile Include="Config.cs" />
+    <Compile Include="OldPlayerState.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
