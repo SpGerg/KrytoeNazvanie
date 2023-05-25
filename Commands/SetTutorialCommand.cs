@@ -25,32 +25,40 @@ namespace KrytoeNazvanie.Commands
 
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
-            if (!(sender is PlayerCommandSender))
+            if (sender is not PlayerCommandSender playerCommandSender)
             {
                 response = "Только в консоли, друг!";
 
                 return true;
             }
 
-            Player player = Player.Get(sender);
+            Log.Info(playerCommandSender);
+
+            Player player = Player.Get(playerCommandSender);
+
+            if (player == null)
+            {
+                Log.Info("bruh");
+            }
+
+            Log.Info(player);
 
             RaycastHit hit;
 
-            if(Physics.Raycast(player.CameraTransform.position, player.CameraTransform.forward, out hit, Program.Instance.Config.Range))
+            if(Physics.Raycast(player.CameraTransform.position, player.CameraTransform.forward, out hit, 50))
             {
-                Player target = Player.Get(hit.collider.gameObject);
+                Player target = Player.Get(hit.collider);
 
-                if (target != null)
-                {
-                    target.RoleManager.InitializeNewRole(PlayerRoles.RoleTypeId.Tutorial, PlayerRoles.RoleChangeReason.None);
-                }
+                target.RoleManager.InitializeNewRole(PlayerRoles.RoleTypeId.Tutorial, PlayerRoles.RoleChangeReason.None);
 
-                response = "Игрока " + target.Nickname + " роль была установлена.";
+                response = "Игрок " + target.Nickname;
 
                 return true;
             }
-
-            response = "Игрок не найден.";
+            else
+            {
+                response = "very bruh";
+            }  
 
             return true;
         }
